@@ -51,8 +51,115 @@ This project simulates a multi-threaded system in which producers generate messa
 
 ## API Documentation
 
-The full API is documented in [`docs/openapi.yaml`](docs/openapi.yaml).
+The full API is documented in [`docs/openapi.yaml`](docs/openapi.yaml). 
 
 To view and interact with the API:
 - Use [Swagger Editor](https://editor.swagger.io/)
-- Or run the app and open Swagger UI:
+- Or run the app and open Swagger UI: http://localhost:8080/swagger-ui.html
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Java 24
+- Gradle 7+
+
+### Build & Run
+
+```bash
+./gradlew bootRun
+```
+
+## Usage
+
+### 🚀 Change Producer Configuration
+
+**POST /v1/producers**
+
+Update the number and speed of producer threads.
+
+**Request Body:**
+
+```json
+{
+  "count": 3,
+  "speed": {
+    "value": 1,
+    "unit": "SECONDS"
+  }
+}
+```
+**Response:**
+- 204 No Content on success
+
+### 🎯 Change Consumer Configuration
+
+**POST /v1/consumers**
+
+Update the number and speed of consumer threads.
+
+**Request Body:**
+
+```json
+{
+  "count": 2,
+  "speed": {
+    "value": 2,
+    "unit": "SECONDS"
+  }
+}
+```
+
+**Response:**
+- 204 No Content on success
+
+### 📊 Get System Stats
+**GET /v1/stats**
+
+Returns current system state and performance metrics.
+
+**Sample Response:**
+
+```json
+{
+  "totalMessagesProduced": 150,
+  "totalMessagesConsumed": 143,
+  "producerCount": 3,
+  "consumerCount": 2,
+  "producerSpeed": "1 SECONDS",
+  "consumerSpeed": "2 SECONDS",
+  "producedPerMinute": 60,
+  "consumedPerMinute": 30
+}
+```
+
+## Testing
+Run all tests using:
+
+```bash
+./gradlew test
+```
+
+Test coverage includes:
+- REST endpoint behavior
+- Concurrency and race conditions
+- Speed/throttle configuration edge cases
+
+## Code Quality
+This project embraces modern Java practices for code health and safety:
+
+- Null-safety with JSpecify
+- Modular, testable design
+- Static analysis tools (planned)
+- REST contract via OpenAPI
+- Clean separation of concerns
+
+Future additions may include integration with static analyzers like SpotBugs, Checkstyle, and JaCoCo for code coverage.
+
+## Planned Improvements
+- [ ] Add Server-Sent Events (SSE) or WebSockets for real-time stats
+- [ ] Include health and metrics endpoints via Spring Boot Actuator
+- [ ] Add Docker support
+- [ ] Integration with static code analysis tools
