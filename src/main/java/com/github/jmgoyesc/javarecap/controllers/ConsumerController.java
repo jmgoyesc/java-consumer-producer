@@ -1,6 +1,7 @@
 package com.github.jmgoyesc.javarecap.controllers;
 
 import com.github.jmgoyesc.javarecap.domain.ChannelConfig;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class ConsumerController {
 
     @PostMapping
-    public void set(@RequestBody ChannelConfig config){
+    public void set(@RequestBody @Valid ChannelConfig config){
 
     }
 

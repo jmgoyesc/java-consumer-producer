@@ -67,23 +67,9 @@ components:
           type: integer
           minimum: 0
           example: 3
-        speed:
-          $ref: '#/components/schemas/Speed'
-
-    Speed:
-      type: object
-      required:
-        - value
-        - unit
-      properties:
-        value:
+        speedInSeconds:
           type: integer
-          minimum: 1
-          example: 2
-        unit:
-          type: string
-          enum: [SECONDS, MILLISECONDS]
-          example: SECONDS
+          example: 3
 
     StatsResponse:
       type: object
@@ -102,9 +88,9 @@ components:
         count:
           type: integer
           example: 2
-        speed:
-          type: string
-          example: "2 SECONDS"
+        speedInSeconds:
+          type: integer
+          example: 3
         messagesPerMinute:
           type: integer
           example: 30

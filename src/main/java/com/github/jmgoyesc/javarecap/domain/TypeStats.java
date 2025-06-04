@@ -7,7 +7,7 @@ import lombok.With;
 public record TypeStats(
         int messages,
         int count,
-        String speed,
+        int speedInSeconds,
         int messagesPerMinute
 ) {
 }

@@ -1,6 +1,7 @@
 package com.github.jmgoyesc.javarecap.controllers;
 
 import com.github.jmgoyesc.javarecap.domain.ChannelConfig;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProducerController {
 
     @PostMapping
-    public void set(@RequestBody ChannelConfig config) {
+    public void set(@RequestBody @Valid ChannelConfig config) {
 
     }
 
