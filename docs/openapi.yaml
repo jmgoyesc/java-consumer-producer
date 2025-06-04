@@ -89,33 +89,23 @@ components:
       type: object
       properties:
         producer:
-          type: object
-          properties:
-            messages:
-              type: integer
-              example: 150
-            count:
-              type: integer
-              example: 3
-            speed:
-              type: string
-              example: "1 SECONDS"
-            producedPerMinute:
-              type: integer
-              example: 60
+          $ref: '#/components/schemas/TypeStats'
         consumer:
-          type: object
-          properties:
-            messages:
-              type: integer
-              example: 143
-            count:
-              type: integer
-              example: 2
-            speed:
-              type: string
-              example: "2 SECONDS"
-            consumedPerMinute:
-              type: integer
-              example: 30
+          $ref: '#/components/schemas/TypeStats'
+
+    TypeStats:
+      type: object
+      properties:
+        messages:
+          type: integer
+          example: 143
+        count:
+          type: integer
+          example: 2
+        speed:
+          type: string
+          example: "2 SECONDS"
+        messagesPerMinute:
+          type: integer
+          example: 30
 
