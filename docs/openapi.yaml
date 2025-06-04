@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Java Consumer Producer API
+  description: REST API for controlling a producer-consumer system with dynamic speed and instance management.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /v1/stats:
+    get:
+      summary: Get system statistics
+      operationId: getStats
+      responses:
+        '200':
+          description: Statistics about the current state of the system
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatsResponse'
+
+  /v1/producers:
+    post:
+      summary: Configure producers
+      operationId: updateProducers
+      requestBody:
+        description: Number of producer instances and their speed
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigRequest'
+      responses:
+        '204':
+          description: Producer configuration updated successfully
+        '400':
+          description: Invalid input
+
+  /v1/consumers:
+    post:
+      summary: Configure consumers
+      operationId: updateConsumers
+      requestBody:
+        description: Number of consumer instances and their speed
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigRequest'
+      responses:
+        '204':
+          description: Consumer configuration updated successfully
+        '400':
+          description: Invalid input
+
+components:
+  schemas:
+    ConfigRequest:
+      type: object
+      required:
+        - count
+        - speed
+      properties:
+        count:
+          type: integer
+          minimum: 0
+          example: 3
+        speed:
+          $ref: '#/components/schemas/Speed'
+
+    Speed:
+      type: object
+      required:
+        - value
+        - unit
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          example: 2
+        unit:
+          type: string
+          enum: [SECONDS, MILLISECONDS]
+          example: SECONDS
+
+    StatsResponse:
+      type: object
+      properties:
+        producer:
+          type: object
+          properties:
+            messages:
+              type: integer
+              example: 150
+            count:
+              type: integer
+              example: 3
+            speed:
+              type: string
+              example: "1 SECONDS"
+            producedPerMinute:
+              type: integer
+              example: 60
+        consumer:
+          type: object
+          properties:
+            messages:
+              type: integer
+              example: 143
+            count:
+              type: integer
+              example: 2
+            speed:
+              type: string
+              example: "2 SECONDS"
+            consumedPerMinute:
+              type: integer
+              example: 30
+
