@@ -20,7 +20,7 @@ A sample Spring Boot project to explore concurrency in Java using a configurable
 
 ## Overview
 
-This project simulates a multi-threaded system in which producers generate messages and consumers process them. Both producers and consumers run in-memory with configurable speeds and instance counts. The system is designed to help explore concurrency patterns, Spring Boot APIs, and advanced null-safety practices using [JSpecify](https://jspecify.dev).
+This project simulates a multithreaded system in which producers generate messages and consumers process them. Both producers and consumers run in-memory with configurable speeds and instance counts. The system is designed to help explore concurrency patterns, Spring Boot APIs, and advanced null-safety practices using [JSpecify](https://jspecify.dev).
 
 ---
 
@@ -85,10 +85,7 @@ Update the number and speed of producer threads.
 ```json
 {
   "count": 3,
-  "speed": {
-    "value": 1,
-    "unit": "SECONDS"
-  }
+  "speedInSeconds": 3
 }
 ```
 **Response:**
@@ -105,10 +102,7 @@ Update the number and speed of consumer threads.
 ```json
 {
   "count": 2,
-  "speed": {
-    "value": 2,
-    "unit": "SECONDS"
-  }
+  "speedInSeconds": 3
 }
 ```
 
@@ -124,14 +118,18 @@ Returns current system state and performance metrics.
 
 ```json
 {
-  "totalMessagesProduced": 150,
-  "totalMessagesConsumed": 143,
-  "producerCount": 3,
-  "consumerCount": 2,
-  "producerSpeed": "1 SECONDS",
-  "consumerSpeed": "2 SECONDS",
-  "producedPerMinute": 60,
-  "consumedPerMinute": 30
+  "producer": {
+    "messages": 143,
+    "count": 2,
+    "speedInSeconds": 3,
+    "messagesPerMinute": 30
+  },
+  "consumer": {
+    "messages": 143,
+    "count": 2,
+    "speedInSeconds": 3,
+    "messagesPerMinute": 30
+  }
 }
 ```
 
